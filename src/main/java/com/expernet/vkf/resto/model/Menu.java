@@ -30,17 +30,21 @@ public class Menu {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-        name = "lesPlats",
+        name = "lesPlatsMenu",
         joinColumns = @JoinColumn(name = "idMenu"),
         inverseJoinColumns = @JoinColumn(name = "idPlat")
     )
     private List<Plat> lesPlats = new ArrayList<>();
 
-    public Menu(Long id, String nom, BigDecimal prix, List<Plat> lesPlats) {
+    @ManyToMany(mappedBy = "lesMenusCommande")
+    private List<Commande> lesCommandes = new ArrayList<>();
+
+    public Menu(Long id, String nom, BigDecimal prix, List<Plat> lesPlats, List<Commande> lesCommandes) {
         this.id = id;
         this.nom = nom;
         this.prix = prix;
         this.lesPlats = lesPlats;
+        this.lesCommandes = lesCommandes;
     }
 
     public Menu() {
@@ -78,8 +82,17 @@ public class Menu {
         this.lesPlats = lesPlats;
     }
 
+    public List<Commande> getLesCommandes() {
+        return lesCommandes;
+    }
+
+    public void setLesCommandes(List<Commande> lesCommandes) {
+        this.lesCommandes = lesCommandes;
+    }
+
     @Override
     public String toString() {
-        return "Menu [id=" + id + ", nom=" + nom + ", prix=" + prix + ", lesPlats=" + lesPlats + "]";
-    }
+        return "Menu [id=" + id + ", nom=" + nom + ", prix=" + prix + ", lesPlats=" + lesPlats + ", lesCommandes="
+                + lesCommandes + "]";
+    }    
 }

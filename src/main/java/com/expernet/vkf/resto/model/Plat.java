@@ -31,13 +31,20 @@ public class Plat {
     @JoinColumn(name = "idTypePlat")
     private TypePlat typePlat;
 
-    @ManyToMany(mappedBy = "lesPlats")
+    @ManyToMany(mappedBy = "lesPlatsMenu")
     private List<Menu> lesMenus = new ArrayList<>();
 
-    public Plat(Long id, String nom, BigDecimal prix) {
+    @ManyToMany(mappedBy = "lesPlatsCommande")
+    private List<Commande> lesCommandes = new ArrayList<>();
+
+    public Plat(Long id, String nom, BigDecimal prix, TypePlat typePlat, List<Menu> lesMenus,
+            List<Commande> lesCommandes) {
         this.id = id;
         this.nom = nom;
         this.prix = prix;
+        this.typePlat = typePlat;
+        this.lesMenus = lesMenus;
+        this.lesCommandes = lesCommandes;
     }
 
     public Plat() {
@@ -63,6 +70,10 @@ public class Plat {
         return prix;
     }
 
+    public void setPrix(BigDecimal prix) {
+        this.prix = prix;
+    }
+
     public TypePlat getTypePlat() {
         return typePlat;
     }
@@ -71,20 +82,25 @@ public class Plat {
         this.typePlat = typePlat;
     }
 
-    public void setPrix(BigDecimal prix) {
-        this.prix = prix;
-    }
-    
     public List<Menu> getLesMenus() {
         return lesMenus;
     }
 
     public void setLesMenus(List<Menu> lesMenus) {
         this.lesMenus = lesMenus;
-    } 
+    }
+
+    public List<Commande> getLesCommandes() {
+        return lesCommandes;
+    }
+
+    public void setLesCommandes(List<Commande> lesCommandes) {
+        this.lesCommandes = lesCommandes;
+    }
 
     @Override
     public String toString() {
-        return "Plat [id=" + id + ", nom=" + nom + ", prix=" + prix + ", typePlat=" + typePlat + "]";
-    }
+        return "Plat [id=" + id + ", nom=" + nom + ", prix=" + prix + ", typePlat=" + typePlat + ", lesMenus="
+                + lesMenus + ", lesCommandes=" + lesCommandes + "]";
+    }    
 }

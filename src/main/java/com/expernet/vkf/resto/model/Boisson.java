@@ -1,12 +1,15 @@
 package com.expernet.vkf.resto.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,10 +25,14 @@ public class Boisson {
     @Column(name = "prix")
     private BigDecimal prix;
 
-    public Boisson(Long id, String nom, BigDecimal prix) {
+    @ManyToMany(mappedBy = "lesBoissonsCommande")
+    private List<Commande> lesCommandes = new ArrayList<>();
+
+    public Boisson(Long id, String nom, BigDecimal prix, List<Commande> lesCommandes) {
         this.id = id;
         this.nom = nom;
         this.prix = prix;
+        this.lesCommandes = lesCommandes;
     }
 
     public Boisson() {
@@ -55,8 +62,16 @@ public class Boisson {
         this.prix = prix;
     }
 
+    public List<Commande> getLesCommandes() {
+        return lesCommandes;
+    }
+
+    public void setLesCommandes(List<Commande> lesCommandes) {
+        this.lesCommandes = lesCommandes;
+    }
+
     @Override
     public String toString() {
-        return "Boisson [id=" + id + ", nom=" + nom + ", prix=" + prix + "]";
+        return "Boisson [id=" + id + ", nom=" + nom + ", prix=" + prix + ", lesCommandes=" + lesCommandes + "]";
     }
 }
