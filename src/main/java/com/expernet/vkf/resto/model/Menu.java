@@ -4,19 +4,20 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="Plat")
-public class Plat {
+@Table(name="Menu")
+public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,20 +28,22 @@ public class Plat {
     @Column(name = "prix")
     private BigDecimal prix;
 
-    @ManyToOne
-    @JoinColumn(name = "idTypePlat")
-    private TypePlat typePlat;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "lesPlats",
+        joinColumns = @JoinColumn(name = "idMenu"),
+        inverseJoinColumns = @JoinColumn(name = "idPlat")
+    )
+    private List<Plat> lesPlats = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "lesPlats")
-    private List<Menu> lesMenus = new ArrayList<>();
-
-    public Plat(Long id, String nom, BigDecimal prix) {
+    public Menu(Long id, String nom, BigDecimal prix, List<Plat> lesPlats) {
         this.id = id;
         this.nom = nom;
         this.prix = prix;
+        this.lesPlats = lesPlats;
     }
 
-    public Plat() {
+    public Menu() {
     }
 
     public Long getId() {
@@ -63,28 +66,20 @@ public class Plat {
         return prix;
     }
 
-    public TypePlat getTypePlat() {
-        return typePlat;
-    }
-
-    public void setTypePlat(TypePlat typePlat) {
-        this.typePlat = typePlat;
-    }
-
     public void setPrix(BigDecimal prix) {
         this.prix = prix;
     }
-    
-    public List<Menu> getLesMenus() {
-        return lesMenus;
+
+    public List<Plat> getLesPlats() {
+        return lesPlats;
     }
 
-    public void setLesMenus(List<Menu> lesMenus) {
-        this.lesMenus = lesMenus;
-    } 
+    public void setLesPlats(List<Plat> lesPlats) {
+        this.lesPlats = lesPlats;
+    }
 
     @Override
     public String toString() {
-        return "Plat [id=" + id + ", nom=" + nom + ", prix=" + prix + ", typePlat=" + typePlat + "]";
+        return "Menu [id=" + id + ", nom=" + nom + ", prix=" + prix + ", lesPlats=" + lesPlats + "]";
     }
 }
