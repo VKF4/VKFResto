@@ -34,6 +34,7 @@ public class MenuController {
         Menu menu = menuRepository.findById(menu_id).get();   
         menu.setNom(menuDetails.getNom());
         menu.setPrix(menuDetails.getPrix());
+        menu.setLesPlats(menuDetails.getLesPlats());
         menuRepository.save(menu);
         return menu;        
     }
