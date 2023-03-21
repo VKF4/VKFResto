@@ -34,6 +34,7 @@ public class PlatController {
         Plat plat = platRepository.findById(plat_id).get();   
         plat.setNom(platDetails.getNom());
         plat.setPrix(platDetails.getPrix());
+        plat.setTypePlat(platDetails.getTypePlat());
         platRepository.save(plat);
         return plat;        
     }
