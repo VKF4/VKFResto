@@ -34,7 +34,7 @@ public class Menu {
         joinColumns = @JoinColumn(name = "idMenu"),
         inverseJoinColumns = @JoinColumn(name = "idPlat")
     )
-    private List<Plat> lesPlats = new ArrayList<>();
+    private List<Plat> lesPlatsMenu = new ArrayList<>();
 
     @ManyToMany(mappedBy = "lesMenusCommande")
     private List<Commande> lesCommandes = new ArrayList<>();
@@ -43,7 +43,7 @@ public class Menu {
         this.id = id;
         this.nom = nom;
         this.prix = prix;
-        this.lesPlats = lesPlats;
+        this.lesPlatsMenu = lesPlats;
         this.lesCommandes = lesCommandes;
     }
 
@@ -75,11 +75,11 @@ public class Menu {
     }
 
     public List<Plat> getLesPlats() {
-        return lesPlats;
+        return lesPlatsMenu;
     }
 
     public void setLesPlats(List<Plat> lesPlats) {
-        this.lesPlats = lesPlats;
+        this.lesPlatsMenu = lesPlats;
     }
 
     public List<Commande> getLesCommandes() {
@@ -92,7 +92,7 @@ public class Menu {
 
     @Override
     public String toString() {
-        return "Menu [id=" + id + ", nom=" + nom + ", prix=" + prix + ", lesPlats=" + lesPlats + ", lesCommandes="
+        return "Menu [id=" + id + ", nom=" + nom + ", prix=" + prix + ", lesPlats=" + lesPlatsMenu + ", lesCommandes="
                 + lesCommandes + "]";
     }    
 }

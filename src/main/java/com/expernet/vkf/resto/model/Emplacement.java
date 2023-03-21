@@ -5,10 +5,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
-@jakarta.persistence.Table(name = "TypePlat")
-public class Table {
+@Table(name = "Emplacement")
+public class Emplacement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,13 +20,13 @@ public class Table {
     @Column(name = "nbPlaces")
     private Long nbPlaces;
 
-    public Table(Long id, Long numero, Long nbPlaces) {
+    public Emplacement(Long id, Long numero, Long nbPlaces) {
         this.id = id;
         this.numero = numero;
         this.nbPlaces = nbPlaces;
     }
 
-    public Table() {
+    public Emplacement() {
     }
 
     public Long getId() {
@@ -54,6 +55,6 @@ public class Table {
 
     @Override
     public String toString() {
-        return "Table [id=" + id + ", numero=" + numero + ", nbPlaces=" + nbPlaces + "]";
+        return "Emplacement [id=" + id + ", numero=" + numero + ", nbPlaces=" + nbPlaces + "]";
     }    
 }

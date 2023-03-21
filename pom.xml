@@ -73,13 +73,13 @@
 						<id>generate-docs</id>
 						<phase>prepare-package</phase>
 						<goals>
-							<goal>process-asciidoc</goal>
+							<goal>process-asciidoc</goal>	
 						</goals>
 						<configuration>
 							<backend>html</backend>
 							<doctype>book</doctype>
 						</configuration>
-					</execution>
+					</execution>						
 				</executions>
 				<dependencies>
 					<dependency>
@@ -92,6 +92,13 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

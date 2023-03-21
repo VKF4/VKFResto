@@ -31,8 +31,8 @@ public class Commande {
     private BigDecimal prix;
     
     @ManyToOne
-    @JoinColumn(name = "idTable")
-    private Table table;
+    @JoinColumn(name = "idEmplacement")
+    private Emplacement emplacement;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -40,7 +40,7 @@ public class Commande {
         joinColumns = @JoinColumn(name = "idCommande"),
         inverseJoinColumns = @JoinColumn(name = "idPlat")
     )
-    private List<Plat> lesPlats = new ArrayList<>();
+    private List<Plat> lesPlatsCommande = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -48,7 +48,7 @@ public class Commande {
         joinColumns = @JoinColumn(name = "idCommande"),
         inverseJoinColumns = @JoinColumn(name = "idMenu")
     )
-    private List<Menu> lesMenus = new ArrayList<>();
+    private List<Menu> lesMenusCommande = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -56,17 +56,17 @@ public class Commande {
         joinColumns = @JoinColumn(name = "idCommande"),
         inverseJoinColumns = @JoinColumn(name = "idBoisson")
     )
-    private List<Boisson> lesBoissons = new ArrayList<>();
+    private List<Boisson> lesBoissonsCommande = new ArrayList<>();
 
-    public Commande(Long id, LocalDateTime dateHeure, BigDecimal prix, Table table, List<Plat> lesPlats,
+    public Commande(Long id, LocalDateTime dateHeure, BigDecimal prix, Emplacement emplacement, List<Plat> lesPlats,
             List<Menu> lesMenus, List<Boisson> lesBoissons) {
         this.id = id;
         this.dateHeure = dateHeure;
         this.prix = prix;
-        this.table = table;
-        this.lesPlats = lesPlats;
-        this.lesMenus = lesMenus;
-        this.lesBoissons = lesBoissons;
+        this.emplacement = emplacement;
+        this.lesPlatsCommande = lesPlats;
+        this.lesMenusCommande = lesMenus;
+        this.lesBoissonsCommande = lesBoissons;
     }
 
     public Commande() {
@@ -96,42 +96,42 @@ public class Commande {
         this.prix = prix;
     }
 
-    public Table getTable() {
-        return table;
+    public Emplacement getEmplacement() {
+        return emplacement;
     }
 
-    public void setTable(Table table) {
-        this.table = table;
+    public void setEmplacement(Emplacement emplacement) {
+        this.emplacement = emplacement;
     }
 
     public List<Plat> getLesPlats() {
-        return lesPlats;
+        return lesPlatsCommande;
     }
 
     public void setLesPlats(List<Plat> lesPlats) {
-        this.lesPlats = lesPlats;
+        this.lesPlatsCommande = lesPlats;
     }
 
     public List<Menu> getLesMenus() {
-        return lesMenus;
+        return lesMenusCommande;
     }
 
     public void setLesMenus(List<Menu> lesMenus) {
-        this.lesMenus = lesMenus;
+        this.lesMenusCommande = lesMenus;
     }
 
     public List<Boisson> getLesBoissons() {
-        return lesBoissons;
+        return lesBoissonsCommande;
     }
 
     public void setLesBoissons(List<Boisson> lesBoissons) {
-        this.lesBoissons = lesBoissons;
+        this.lesBoissonsCommande = lesBoissons;
     }
 
     @Override
     public String toString() {
-        return "Commande [id=" + id + ", dateHeure=" + dateHeure + ", prix=" + prix + ", table=" + table + ", lesPlats="
-                + lesPlats + ", lesMenus=" + lesMenus + ", lesBoissons=" + lesBoissons + "]";
+        return "Commande [id=" + id + ", dateHeure=" + dateHeure + ", prix=" + prix + ", emplacement=" + emplacement + ", lesPlats="
+                + lesPlatsCommande + ", lesMenus=" + lesMenusCommande + ", lesBoissons=" + lesBoissonsCommande + "]";
     }
     
 }
