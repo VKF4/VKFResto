@@ -111,7 +111,7 @@ public class Commande {
     public void setLesPlats(List<Plat> lesPlats) {
         this.lesPlatsCommande = lesPlats;
     }
-
+    
     public List<Menu> getLesMenus() {
         return lesMenusCommande;
     }

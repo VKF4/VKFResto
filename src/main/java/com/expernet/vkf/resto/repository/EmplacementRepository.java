@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.expernet.vkf.resto.model.Emplacement;
 
-public interface TableRepository extends CrudRepository<Emplacement, Long>{
+public interface EmplacementRepository extends CrudRepository<Emplacement, Long>{
     
 }
