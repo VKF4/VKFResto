@@ -28,6 +28,9 @@ public class Menu {
     @Column(name = "prix")
     private BigDecimal prix;
 
+    @Column(name = "actif")
+    private Boolean actif;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name = "lesPlatsMenu",
@@ -39,10 +42,11 @@ public class Menu {
     @ManyToMany(mappedBy = "lesMenusCommande")
     private List<Commande> lesCommandes = new ArrayList<>();
 
-    public Menu(Long id, String nom, BigDecimal prix, List<Plat> lesPlats, List<Commande> lesCommandes) {
+    public Menu(Long id, String nom, BigDecimal prix, Boolean actif, List<Plat> lesPlats, List<Commande> lesCommandes) {
         this.id = id;
         this.nom = nom;
         this.prix = prix;
+        this.actif = actif;
         this.lesPlatsMenu = lesPlats;
         this.lesCommandes = lesCommandes;
     }
@@ -73,6 +77,14 @@ public class Menu {
     public void setPrix(BigDecimal prix) {
         this.prix = prix;
     }
+    
+    public Boolean getActif() {
+        return actif;
+    }
+
+    public void setActif(Boolean actif) {
+        this.actif = actif;
+    }
 
     public List<Plat> getLesPlats() {
         return lesPlatsMenu;
@@ -80,6 +92,11 @@ public class Menu {
 
     public void setLesPlats(List<Plat> lesPlats) {
         this.lesPlatsMenu = lesPlats;
+    }
+
+    public List<Plat> addUnPlat(Plat plat){
+        this.lesPlatsMenu.add(plat);
+        return this.lesPlatsMenu;
     }
 
     public List<Commande> getLesCommandes() {
@@ -90,9 +107,17 @@ public class Menu {
         this.lesCommandes = lesCommandes;
     }
 
+    public List<Plat> getLesPlatsMenu() {
+        return lesPlatsMenu;
+    }
+
+    public void setLesPlatsMenu(List<Plat> lesPlatsMenu) {
+        this.lesPlatsMenu = lesPlatsMenu;
+    }  
+
     @Override
     public String toString() {
-        return "Menu [id=" + id + ", nom=" + nom + ", prix=" + prix + ", lesPlats=" + lesPlatsMenu + ", lesCommandes="
-                + lesCommandes + "]";
-    }    
+        return "Menu [id=" + id + ", nom=" + nom + ", prix=" + prix + ", actif=" + actif + ", lesPlats=" 
+                + lesPlatsMenu + ", lesCommandes=" + lesCommandes + "]";
+    }      
 }

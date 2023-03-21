@@ -27,6 +27,9 @@ public class Plat {
     @Column(name = "prix")
     private BigDecimal prix;
 
+    @Column(name = "actif")
+    private Boolean actif;
+
     @ManyToOne
     @JoinColumn(name = "idTypePlat")
     private TypePlat typePlat;
@@ -74,6 +77,14 @@ public class Plat {
         this.prix = prix;
     }
 
+    public Boolean getActif() {
+        return actif;
+    }
+
+    public void setActif(Boolean actif) {
+        this.actif = actif;
+    } 
+
     public TypePlat getTypePlat() {
         return typePlat;
     }
@@ -100,7 +111,7 @@ public class Plat {
 
     @Override
     public String toString() {
-        return "Plat [id=" + id + ", nom=" + nom + ", prix=" + prix + ", typePlat=" + typePlat + ", lesMenus="
-                + lesMenus + ", lesCommandes=" + lesCommandes + "]";
-    }    
+        return "Plat [id=" + id + ", nom=" + nom + ", prix=" + prix + ", actif=" + actif + ", typePlat=" + typePlat 
+                + ", lesMenus=" + lesMenus + ", lesCommandes=" + lesCommandes + "]";
+    }   
 }
