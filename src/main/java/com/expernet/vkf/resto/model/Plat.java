@@ -40,14 +40,11 @@ public class Plat {
     @ManyToMany(mappedBy = "lesPlatsCommande")
     private List<Commande> lesCommandes = new ArrayList<>();
 
-    public Plat(Long id, String nom, BigDecimal prix, TypePlat typePlat, List<Menu> lesMenus,
-            List<Commande> lesCommandes) {
+    public Plat(Long id, String nom, BigDecimal prix, TypePlat typePlat) {
         this.id = id;
         this.nom = nom;
         this.prix = prix;
         this.typePlat = typePlat;
-        this.lesMenus = lesMenus;
-        this.lesCommandes = lesCommandes;
     }
 
     public Plat() {
@@ -93,25 +90,8 @@ public class Plat {
         this.typePlat = typePlat;
     }
 
-    public List<Menu> getLesMenus() {
-        return lesMenus;
-    }
-
-    public void setLesMenus(List<Menu> lesMenus) {
-        this.lesMenus = lesMenus;
-    }
-
-    public List<Commande> getLesCommandes() {
-        return lesCommandes;
-    }
-
-    public void setLesCommandes(List<Commande> lesCommandes) {
-        this.lesCommandes = lesCommandes;
-    }
-
     @Override
     public String toString() {
-        return "Plat [id=" + id + ", nom=" + nom + ", prix=" + prix + ", actif=" + actif + ", typePlat=" + typePlat 
-                + ", lesMenus=" + lesMenus + ", lesCommandes=" + lesCommandes + "]";
+        return "Plat [id=" + id + ", nom=" + nom + ", prix=" + prix + ", actif=" + actif + ", typePlat=" + typePlat + "]";
     }   
 }
