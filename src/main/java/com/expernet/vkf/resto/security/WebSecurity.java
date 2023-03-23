@@ -19,7 +19,7 @@ public class WebSecurity {
 	    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 	        http.csrf().disable()
 	            .authorizeHttpRequests((authz) -> authz
-				.requestMatchers("/register", "/login").permitAll()
+				.requestMatchers("/vkf/resto/register", "/vkf/resto/login").permitAll()
 	            .anyRequest().authenticated()
 	        );
 	            

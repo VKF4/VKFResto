@@ -25,7 +25,7 @@ public class JwtAuthenticationController {
     public JwtAuthenticationController() {
     }
 
-    @PostMapping("/register")
+    @PostMapping("/vkf/resto/register")
     public ResponseEntity<Utilisateur> registerUser(@RequestBody Utilisateur utilisateur) throws Exception{
         boolean utilisateurExisteDeja = utilisateurRepository.findById(utilisateur.getUsername()).orElse(null) != null;
         if (utilisateurExisteDeja)
@@ -36,7 +36,7 @@ public class JwtAuthenticationController {
         return ResponseEntity.ok(utilisateur);
     }
 
-	@GetMapping("/login")
+	@GetMapping("/vkf/resto/login")
     public ResponseEntity<String> createAuthenticationToken(@RequestHeader Map<String, String> header, 
         @Value("${jwt.secret}") String secret) throws Exception{
         String username = getUsernameInRequestHeader(header);
