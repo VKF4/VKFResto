@@ -1,6 +1,7 @@
 package com.expernet.vkf.resto.controller;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,11 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.expernet.vkf.resto.repository.BoissonRepository;
+import com.expernet.vkf.resto.repository.CommandeRepository;
 import com.expernet.vkf.resto.repository.EmplacementRepository;
 import com.expernet.vkf.resto.repository.MenuRepository;
 import com.expernet.vkf.resto.repository.PlatRepository;
 import com.expernet.vkf.resto.repository.TypePlatRepository;
 import com.expernet.vkf.resto.model.Boisson;
+import com.expernet.vkf.resto.model.Commande;
 import com.expernet.vkf.resto.model.Emplacement;
 import com.expernet.vkf.resto.model.Menu;
 import com.expernet.vkf.resto.model.Plat;
@@ -31,6 +34,8 @@ public class JeuxDonneesController {
     private EmplacementRepository emplacementRepository;
     @Autowired
     private MenuRepository menuRepository;
+    @Autowired
+    private CommandeRepository commandeRepository;
 
     @GetMapping("/addBoisson")
     public Iterable<Boisson> addBoisson() {
@@ -260,4 +265,49 @@ public class JeuxDonneesController {
 
         return iterableMenu;
     }    
+
+    @GetMapping("/addCommande")
+    public Iterable<Commande> addCommande() {
+        Commande commande1 = new Commande();
+        commande1.setDateHeure(LocalDateTime.now());
+        commande1.setEmplacement(emplacementRepository.findById(1L).get());
+        commande1.addUnPlat(platRepository.findById(6L).get());
+        BigDecimal valeur1 = (BigDecimal) platRepository.findById(6L).get().getPrix();
+        commande1.addUnPlat(platRepository.findById(15L).get());
+        BigDecimal valeur2 = (BigDecimal) platRepository.findById(15L).get().getPrix();
+        commande1.addUnPlat(platRepository.findById(19L).get());
+        BigDecimal valeur3 = (BigDecimal) platRepository.findById(19L).get().getPrix();
+        commande1.addUnPlat(platRepository.findById(27L).get());
+        BigDecimal valeur4 = (BigDecimal) platRepository.findById(27L).get().getPrix();
+        commande1.addUnBoisson(boissonRepository.findById(4L).get());
+        BigDecimal valeur5 = (BigDecimal) boissonRepository.findById(4L).get().getPrix();
+        commande1.addUnMenu(menuRepository.findById(1L).get());
+        BigDecimal valeur6 = (BigDecimal) menuRepository.findById(1L).get().getPrix();
+        commande1.addUnMenu(menuRepository.findById(3L).get());
+        BigDecimal valeur7 = (BigDecimal) menuRepository.findById(3L).get().getPrix();
+        commande1.addUnMenu(menuRepository.findById(5L).get());
+        BigDecimal valeur8 = (BigDecimal) menuRepository.findById(5L).get().getPrix();
+
+        // Créer un objet BigDecimal initialisé à zéro
+        BigDecimal total = BigDecimal.ZERO;
+
+        // Ajouter les valeurs à l'objet BigDecimal total
+        total = total.add(valeur1);
+        total = total.add(valeur2);
+        total = total.add(valeur3);
+        total = total.add(valeur4);
+        total = total.add(valeur5);
+        total = total.add(valeur6);
+        total = total.add(valeur7);
+        total = total.add(valeur8);
+
+        commande1.setPrix(total);
+
+        commandeRepository.save(commande1);
+        
+
+        Iterable<Commande> iterableCommande = commandeRepository.findAll();
+
+        return iterableCommande;
+    }
 }
